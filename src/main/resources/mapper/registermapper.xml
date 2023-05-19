@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.VisaAPI.mapper.RegisterMapper">
+
+
+<insert id="saveUser" parameterType="com.example.VisaAPI.model.RegisterModel"  >
+    INSERT INTO visa_user_api(username,name,sex, birthday,visa_ID,visa_date,visa_type,country,address,status) 
+VALUES (#{username},#{name},#{sex},#{dateofbirth},#{visa_ID},#{visakigen},#{visa_type},#{country},#{address},'ACTIVE');
+INSERT INTO visa_user_api_role (username,password,status,role)VALUES(#{username},#{password},'ACTIVE','USER');
+
+</insert>
+
+<insert id="saveRoles" parameterType="com.example.VisaAPI.model.RegisterModel" >
+INSERT INTO visa_user_api_role (username,password)VALUES(#{username},#{password})
+</insert>
+
+
+<select id="getuser" resultType="com.example.VisaAPI.model.RegisterModel" parameterType="com.example.VisaAPI.model.RegisterModel" > 
+SELECT * FROM visa_user_api where username = #{username}
+</select>
+ </mapper>

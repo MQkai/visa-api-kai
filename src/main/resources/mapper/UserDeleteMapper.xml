@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.VisaAPI.mapper.UserDeleteMapper">
+
+    <update id="DeleteByUsernameRole" parameterType="com.example.VisaAPI.model.UserDeleteModel" >
+    	UPDATE visa_user_api_role SET status = 'DELETE',note=#{note}  WHERE username = #{username}
+    </update>
+    <update id="DeleteByUsernameUser" parameterType="com.example.VisaAPI.model.UserDeleteModel" >
+    	UPDATE visa_user_api SET status = 'DELETE',note=#{note} WHERE username = #{username}
+    </update>
+    <select id="CheckDeleteByUsername" resultType="com.example.VisaAPI.model.UserDeleteModel">
+    	select note,username,role from visa_user_api_role where status = 'ACTIVE' and username = #{username}
+	</select>
+	<select id="SelectDeleteByUsername" resultType="com.example.VisaAPI.model.UserModel">
+		SELECT    id,username,visa_id,name,birthday,sex,country,address,visa_date,visa_type
+		FROM visa_user_api WHERE username = #{username} AND status = 'ACTIVE'
+	</select>
+	<select id="CheckRoleLoginUser" resultType="com.example.VisaAPI.model.UserDeleteModel">
+		select role from visa_user_api_role where username=#{loginUsername}
+	</select>
+</mapper>

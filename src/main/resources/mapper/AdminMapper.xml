@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.VisaAPI.mapper.AdminMapper">
+ 
+    <select id="selectAll" resultType="com.example.VisaAPI.model.AdminModel">
+        SELECT * FROM visa_user_api ;
+    </select>
+    <select id="selectDeleted" resultType="com.example.VisaAPI.model.AdminModel">
+        SELECT * FROM visa_user_api where status='DELETE';
+    </select>
+    <select id="selectActive" resultType="com.example.VisaAPI.model.AdminModel">
+        SELECT * FROM visa_user_api where status='ACTIVE';
+    </select>
+<select id="CheckRoleAdmin" resultType="com.example.VisaAPI.model.AdminModel">
+        SELECT role FROM visa_user_api_role where username=#{username} AND status='ACTIVE'
+    </select>
+</mapper>
